@@ -1,42 +1,466 @@
-#root {
-  max-width: 1280px;
+/* Spotify-style Dark Theme Components */
+
+/* Main content area */
+.main-content {
+  flex: 1;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Override Bootstrap defaults for dark theme */
+.navbar {
+  background-color: var(--bg-secondary) !important;
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 1rem 0;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary) !important;
+  transition: color 0.2s ease;
+}
+
+.navbar-brand:hover {
+  color: var(--accent-hover) !important;
+}
+
+/* Cards */
+.card {
+  background-color: var(--bg-secondary) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 12px !important;
+  color: var(--text-primary);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+/* Desktop optimizations */
+@media (min-width: 768px) {
+  .card-body {
+    padding: 2rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .card-body {
+    padding: 2.5rem;
+  }
+}
+
+/* Forms */
+.form-control {
+  background-color: var(--bg-elevated) !important;
+  border: 1px solid var(--border-strong) !important;
+  color: var(--text-primary) !important;
+  border-radius: 8px !important;
+  padding: 0.75rem 1rem;
+  transition: all 0.2s ease;
+}
+
+.form-control:focus {
+  background-color: var(--bg-highlight) !important;
+  border-color: var(--accent-primary) !important;
+  box-shadow: 0 0 0 3px rgba(29, 185, 84, 0.1) !important;
+  color: var(--text-primary) !important;
+}
+
+.form-control::placeholder {
+  color: var(--text-subdued);
+}
+
+.form-label {
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--accent-primary) !important;
+  border-color: var(--accent-primary) !important;
+  color: var(--text-primary) !important;
+  font-weight: 600;
+  border-radius: 8px !important;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--accent-hover) !important;
+  border-color: var(--accent-hover) !important;
+  transform: scale(1.04);
+  box-shadow: 0 4px 12px rgba(29, 185, 84, 0.3) !important;
+}
+
+.btn-primary:active {
+  background-color: var(--accent-active) !important;
+  transform: scale(0.98);
+}
+
+.btn-outline-secondary {
+  background-color: transparent !important;
+  border-color: var(--border-strong) !important;
+  color: var(--text-secondary) !important;
+  border-radius: 20px !important;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s ease;
+}
+
+.btn-outline-secondary:hover,
+.btn-outline-secondary:focus {
+  background-color: var(--bg-elevated) !important;
+  border-color: var(--text-primary) !important;
+  color: var(--text-primary) !important;
+  transform: scale(1.04);
+}
+
+/* Text colors */
+.text-muted {
+  color: var(--text-secondary) !important;
+}
+
+.text-primary {
+  color: var(--accent-primary) !important;
+}
+
+/* Display heading */
+.display-4 {
+  font-size: 2.5rem;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+/* Desktop Layout Optimizations */
+.weather-detail-container {
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Homepage Specific */
+.homepage-container {
+  max-width: 100%;
+  min-height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@keyframes logo-spin {
+.homepage-card {
+  width: 100%;
+}
+
+.homepage-title {
+  font-size: 2.5rem;
+}
+
+.homepage-subtitle {
+  font-size: 1.1rem;
+}
+
+.homepage-label {
+  font-size: 1rem;
+}
+
+.homepage-input {
+  font-size: 1rem;
+}
+
+.search-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.homepage-popular-label {
+  font-size: 0.875rem;
+}
+
+.popular-city-btn {
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+}
+
+/* Weather Card Desktop */
+.weather-card-main {
+  max-width: 100%;
+}
+
+/* Forecast Section Desktop */
+.forecast-section h3 {
+  font-size: 1.5rem;
+}
+
+/* Weather icon responsive */
+.weather-icon {
+  width: 100px;
+  height: 100px;
+}
+
+/* Weather stat cards */
+.weather-stat-card {
+  transition: all 0.2s ease;
+}
+
+.weather-stat-card:hover {
+  background-color: var(--bg-highlight) !important;
+  transform: translateY(-2px);
+}
+
+/* Forecast cards */
+.forecast-card {
+  transition: all 0.2s ease;
+}
+
+.forecast-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+.forecast-icon {
+  width: 60px;
+  height: 60px;
+}
+
+.forecast-description {
+  font-size: 0.75rem;
+}
+
+/* Mobile First Responsive */
+@media (min-width: 576px) {
+  .display-4 {
+    font-size: 3rem;
+  }
+
+  .homepage-title {
+    font-size: 3rem;
+  }
+
+  .homepage-subtitle {
+    font-size: 1.2rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .display-4 {
+    font-size: 3.5rem;
+  }
+
+  .card-body {
+    padding: 2.5rem;
+  }
+
+  .forecast-section h3 {
+    font-size: 1.75rem;
+  }
+
+  .weather-icon {
+    width: 140px;
+    height: 140px;
+  }
+
+  .forecast-icon {
+    width: 70px;
+    height: 70px;
+  }
+
+  /* Homepage tablet */
+  .homepage-title {
+    font-size: 3.5rem;
+  }
+
+  .homepage-subtitle {
+    font-size: 1.3rem;
+  }
+
+  .homepage-label {
+    font-size: 1.1rem;
+  }
+
+  .homepage-input {
+    font-size: 1.1rem;
+    padding: 1rem 1.25rem;
+  }
+
+  .search-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .popular-city-btn {
+    font-size: 0.95rem;
+    padding: 0.6rem 1.2rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .display-4 {
+    font-size: 4rem;
+  }
+
+  .weather-card-main {
+    font-size: 1.1rem;
+  }
+
+  .weather-card-main .display-1 {
+    font-size: 6rem !important;
+  }
+
+  .forecast-section h3 {
+    font-size: 2rem;
+  }
+
+  .weather-icon {
+    width: 180px;
+    height: 180px;
+  }
+
+  .weather-stat-card {
+    padding: 1.5rem !important;
+  }
+
+  .h2-lg {
+    font-size: 2.5rem !important;
+  }
+
+  .fs-lg-3 {
+    font-size: 1.75rem !important;
+  }
+
+  .forecast-icon {
+    width: 90px;
+    height: 90px;
+  }
+
+  .forecast-description {
+    font-size: 0.875rem;
+  }
+
+  /* Homepage desktop */
+  .homepage-title {
+    font-size: 4.5rem;
+  }
+
+  .homepage-subtitle {
+    font-size: 1.5rem;
+  }
+
+  .homepage-label {
+    font-size: 1.2rem;
+  }
+
+  .homepage-input {
+    font-size: 1.2rem;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .search-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .popular-city-btn {
+    font-size: 1.05rem;
+    padding: 0.75rem 1.5rem;
+  }
+
+  .p-lg-6 {
+    padding: 4rem !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .weather-detail-container {
+    padding: 0 2rem;
+  }
+
+  .weather-card-main .display-1 {
+    font-size: 8rem !important;
+  }
+
+  .card-body {
+    padding: 3.5rem;
+  }
+
+  .weather-icon {
+    width: 200px;
+    height: 200px;
+  }
+
+  .weather-stat-card svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .weather-stat-card .fw-bold {
+    font-size: 1.5rem;
+  }
+
+  .forecast-icon {
+    width: 100px;
+    height: 100px;
+  }
+
+  .forecast-description {
+    font-size: 0.95rem;
+  }
+
+  /* Homepage XL */
+  .homepage-title {
+    font-size: 5rem;
+  }
+
+  .homepage-subtitle {
+    font-size: 1.75rem;
+  }
+
+  .homepage-input {
+    font-size: 1.3rem;
+    padding: 1.5rem 2rem;
+  }
+
+  .search-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .popular-city-btn {
+    font-size: 1.1rem;
+    padding: 0.85rem 1.75rem;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translateY(10px);
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
 }
 
-.card {
-  padding: 2em;
+/* Loading spinner */
+.spinner-border {
+  color: var(--accent-primary) !important;
 }
 
-.read-the-docs {
-  color: #888;
+/* Shadow utilities */
+.shadow-lg {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5) !important;
 }

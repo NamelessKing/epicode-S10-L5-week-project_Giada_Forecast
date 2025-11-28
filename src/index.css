@@ -1,53 +1,87 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  /* Spotify-inspired Dark Theme Colors */
+  --bg-primary: #121212;
+  --bg-secondary: #181818;
+  --bg-elevated: #282828;
+  --bg-highlight: #2a2a2a;
+  --bg-page: #0a0a0a;
+  
+  --text-primary: #ffffff;
+  --text-secondary: #b3b3b3;
+  --text-subdued: #6a6a6a;
+  
+  --accent-primary: #1db954;
+  --accent-hover: #1ed760;
+  --accent-active: #169c46;
+  
+  --border-subtle: #282828;
+  --border-strong: #404040;
+  
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  line-height: 1.6;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+/* Force reload v2 */
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  padding: 0;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--bg-page) !important;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
-button:hover {
-  border-color: #646cff;
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+  margin: 0;
+  font-weight: 700;
+}
+
+/* Custom scrollbar - Spotify style */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-elevated);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-strong);
+}
 }
 button:focus,
 button:focus-visible {
