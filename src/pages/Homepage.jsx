@@ -89,7 +89,7 @@ const Homepage = () => {
                   </h1>
                   <p className="text-muted homepage-subtitle mb-0">
                     Scopri il meteo nella tua città e le previsioni dei prossimi
-                    5 giorni
+                    5 giorni... o scrivi il tuo nome 😉
                   </p>
                 </div>
 
@@ -131,21 +131,14 @@ const Homepage = () => {
                       "Londra",
                       "Tokyo",
                       "New York",
-                      "Giada",
                     ].map((popularCity) => (
                       <Button
                         key={popularCity}
-                        variant={
-                          popularCity === "Giada"
-                            ? "outline-primary"
-                            : "outline-secondary"
-                        }
-                        className={`popular-city-btn ${
-                          popularCity === "Giada" ? "giada-special-btn" : ""
-                        }`}
+                        variant="outline-secondary"
+                        className="popular-city-btn"
                         onClick={() => navigate(`/weather/${popularCity}`)}
                       >
-                        {popularCity === "Giada" ? "💝 Zio Billy" : popularCity}
+                        {popularCity}
                       </Button>
                     ))}
                   </div>

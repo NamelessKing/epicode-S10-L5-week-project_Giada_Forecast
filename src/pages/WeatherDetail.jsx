@@ -80,7 +80,17 @@ const WeatherDetail = () => {
         <Alert variant="danger" className="text-center">
           <Alert.Heading>Ops! Qualcosa è andato storto</Alert.Heading>
           <p>{error}</p>
-          <Button variant="outline-danger" onClick={() => navigate("/")}>
+          <p className="mb-0 mt-2 text-muted">
+            <small>
+              💡 Suggerimento: Assicurati di aver scritto correttamente il nome
+              della città... oppure manca da scrivere il nome giusto? 😉
+            </small>
+          </p>
+          <Button
+            variant="outline-danger"
+            onClick={() => navigate("/")}
+            className="mt-3"
+          >
             Torna alla home
           </Button>
         </Alert>
