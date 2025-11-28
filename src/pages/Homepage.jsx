@@ -140,7 +140,7 @@ const Homepage = () => {
                         }`}
                         onClick={() => navigate(`/weather/${popularCity}`)}
                       >
-                        {popularCity === "Giada" ? "💝 Giada" : popularCity}
+                        {popularCity === "Giada" ? "💝 Zio Billy" : popularCity}
                       </Button>
                     ))}
                   </div>

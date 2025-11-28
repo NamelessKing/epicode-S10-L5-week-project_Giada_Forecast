@@ -17,11 +17,6 @@ const WeatherDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Easter egg: se la città è "Giada", mostra il componente speciale
-  if (city && city.toLowerCase() === "giada") {
-    return <GiadaEasterEgg />;
-  }
-
   useEffect(() => {
     const fetchWeatherData = async () => {
       setLoading(true);
@@ -61,11 +56,18 @@ const WeatherDetail = () => {
     }
   }, [city, searchParams]);
 
+  // Easter egg: se la città è "Giada", mostra il componente speciale
+  if (city && city.toLowerCase() === "giada") {
+    return <GiadaEasterEgg />;
+  }
+
   if (loading) {
     return (
       <Container className="py-3 text-center">
-        <Spinner animation="border" variant="primary" className="mb-2" />
-        <p className="text-muted">Caricamento dati meteo per {city}...</p>
+        <Spinner animation="border" role="status" variant="light">
+          <span className="visually-hidden">Caricamento...</span>
+        </Spinner>
+        <p className="mt-3 text-muted">Caricamento dati meteo...</p>
       </Container>
     );
   }
