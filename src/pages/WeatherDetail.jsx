@@ -12,15 +12,15 @@ const WeatherDetail = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  // Easter egg: se la città è "Giada", mostra il componente speciale
-  if (city && city.toLowerCase() === "giada") {
-    return <GiadaEasterEgg />;
-  }
-
   const [weather, setWeather] = useState(null);
   const [forecast, setForecast] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // Easter egg: se la città è "Giada", mostra il componente speciale
+  if (city && city.toLowerCase() === "giada") {
+    return <GiadaEasterEgg />;
+  }
 
   useEffect(() => {
     const fetchWeatherData = async () => {
