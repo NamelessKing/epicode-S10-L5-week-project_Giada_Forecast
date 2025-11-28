@@ -11,11 +11,11 @@
 .navbar {
   background-color: var(--bg-secondary) !important;
   border-bottom: 1px solid var(--border-subtle);
-  padding: 1rem 0;
+  padding: 0.5rem 0;
 }
 
 .navbar-brand {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--text-primary) !important;
   transition: color 0.2s ease;
@@ -40,19 +40,19 @@
 }
 
 .card-body {
-  padding: 1.5rem;
+  padding: 1rem;
 }
 
 /* Desktop optimizations */
 @media (min-width: 768px) {
   .card-body {
-    padding: 2rem;
+    padding: 1.25rem;
   }
 }
 
 @media (min-width: 992px) {
   .card-body {
-    padding: 2.5rem;
+    padding: 1.5rem;
   }
 }
 
@@ -150,30 +150,111 @@
 /* Homepage Specific */
 .homepage-container {
   max-width: 100%;
-  min-height: calc(100vh - 200px);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  padding: 0;
+  min-height: calc(100vh - 60px);
 }
 
 .homepage-card {
   width: 100%;
+  border-radius: 0 !important;
+  border-left: none !important;
+  border-right: none !important;
+  height: 100%;
+}
+
+@media (min-width: 576px) {
+  .homepage-container {
+    padding: 1rem 0;
+    min-height: 0;
+    align-items: center;
+  }
+
+  .homepage-card {
+    border-radius: 12px !important;
+    border: 1px solid var(--border-subtle) !important;
+    height: auto;
+  }
+}
+  }
 }
 
 .homepage-title {
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 
 .homepage-subtitle {
-  font-size: 1.1rem;
+  font-size: 0.95rem;
 }
 
 .homepage-label {
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 .homepage-input {
-  font-size: 1rem;
+  font-size: 0.95rem;
+}
+
+/* Search Autocomplete Styles */
+.search-autocomplete-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.autocomplete-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 60px; /* Spazio per il bottone search */
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  margin-top: 4px;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.autocomplete-item {
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.autocomplete-item:last-child {
+  border-bottom: none;
+}
+
+.autocomplete-item:hover,
+.autocomplete-item.selected {
+  background-color: var(--bg-highlight);
+}
+
+.autocomplete-item.loading,
+.autocomplete-item.no-results {
+  cursor: default;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.autocomplete-item .city-name {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.autocomplete-item .city-details {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.autocomplete-item.selected .city-name {
+  color: var(--accent-primary);
 }
 
 .search-icon {
@@ -190,6 +271,39 @@
   padding: 0.5rem 1rem;
 }
 
+/* Geolocation Button */
+.geolocation-btn {
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+  border-width: 2px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  background-color: transparent !important;
+  border-color: var(--accent-primary) !important;
+  color: var(--accent-primary) !important;
+}
+
+.geolocation-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(29, 185, 84, 0.4);
+  background-color: var(--accent-primary) !important;
+  color: var(--bg-primary) !important;
+  border-color: var(--accent-primary) !important;
+}
+
+.geolocation-btn:active:not(:disabled) {
+  background-color: var(--accent-hover) !important;
+  border-color: var(--accent-hover) !important;
+  transform: translateY(0);
+}
+
+.geolocation-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-color: var(--text-muted) !important;
+  color: var(--text-muted) !important;
+}
+
 /* Weather Card Desktop */
 .weather-card-main {
   max-width: 100%;
@@ -202,8 +316,8 @@
 
 /* Weather icon responsive */
 .weather-icon {
-  width: 100px;
-  height: 100px;
+  width: 60px;
+  height: 60px;
 }
 
 /* Weather stat cards */
@@ -227,117 +341,137 @@
 }
 
 .forecast-icon {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
 }
 
 .forecast-description {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
 }
 
 /* Mobile First Responsive */
 @media (min-width: 576px) {
   .display-4 {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
 
   .homepage-title {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
 
   .homepage-subtitle {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 }
 
 @media (min-width: 768px) {
   .display-4 {
-    font-size: 3.5rem;
+    font-size: 2.75rem;
   }
 
   .card-body {
-    padding: 2.5rem;
+    padding: 1.25rem;
   }
 
   .forecast-section h3 {
-    font-size: 1.75rem;
+    font-size: 1.35rem;
   }
 
   .weather-icon {
-    width: 140px;
-    height: 140px;
+    width: 80px;
+    height: 80px;
   }
 
   .forecast-icon {
-    width: 70px;
-    height: 70px;
+    width: 50px;
+    height: 50px;
   }
 
   /* Homepage tablet */
   .homepage-title {
-    font-size: 3.5rem;
+    font-size: 2.75rem;
   }
 
   .homepage-subtitle {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
   }
 
   .homepage-label {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 
   .homepage-input {
-    font-size: 1.1rem;
-    padding: 1rem 1.25rem;
+    font-size: 1rem;
+    padding: 0.875rem 1rem;
   }
 
   .search-icon {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
   }
 
   .popular-city-btn {
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .geolocation-btn {
     font-size: 0.95rem;
-    padding: 0.6rem 1.2rem;
+    padding: 0.75rem 1.5rem;
+  }
+
+  /* Autocomplete tablet */
+  .autocomplete-dropdown {
+    right: 70px;
+  }
+
+  .autocomplete-item {
+    padding: 14px 18px;
+  }
+
+  .autocomplete-item .city-name {
+    font-size: 1rem;
+  }
+
+  .autocomplete-item .city-details {
+    font-size: 0.85rem;
   }
 }
 
 @media (min-width: 992px) {
   .display-4 {
-    font-size: 4rem;
+    font-size: 3rem;
   }
 
-  .weather-card-main {
-    font-size: 1.1rem;
-  }
-
-  .weather-card-main .display-1 {
-    font-size: 6rem !important;
+  .card-body {
+    padding: 1.5rem;
   }
 
   .forecast-section h3 {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   .weather-icon {
-    width: 180px;
-    height: 180px;
+    width: 90px;
+    height: 90px;
   }
 
   .weather-stat-card {
-    padding: 1.5rem !important;
+    padding: 1rem !important;
   }
 
   .h2-lg {
-    font-size: 2.5rem !important;
+    font-size: 2rem !important;
   }
 
   .fs-lg-3 {
-    font-size: 1.75rem !important;
+    font-size: 1.5rem !important;
   }
 
   .forecast-icon {
-    width: 90px;
+    width: 55px;
+    height: 55px;
+  }
     height: 90px;
   }
 
@@ -347,30 +481,35 @@
 
   /* Homepage desktop */
   .homepage-title {
-    font-size: 4.5rem;
+    font-size: 3.5rem;
   }
 
   .homepage-subtitle {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 
   .homepage-label {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 
   .homepage-input {
-    font-size: 1.2rem;
-    padding: 1.25rem 1.5rem;
+    font-size: 1rem;
+    padding: 0.875rem 1.25rem;
   }
 
   .search-icon {
-    width: 28px;
-    height: 28px;
+    width: 22px;
+    height: 22px;
   }
 
   .popular-city-btn {
-    font-size: 1.05rem;
-    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+  }
+
+  .geolocation-btn {
+    font-size: 1rem;
+    padding: 0.875rem 1.5rem;
   }
 
   .p-lg-6 {
@@ -379,35 +518,14 @@
 }
 
 @media (min-width: 1200px) {
-  .weather-detail-container {
-    padding: 0 2rem;
-  }
-
-  .weather-card-main .display-1 {
-    font-size: 8rem !important;
-  }
-
-  .card-body {
-    padding: 3.5rem;
-  }
-
   .weather-icon {
-    width: 200px;
-    height: 200px;
-  }
-
-  .weather-stat-card svg {
-    width: 32px;
-    height: 32px;
-  }
-
-  .weather-stat-card .fw-bold {
-    font-size: 1.5rem;
+    width: 100px;
+    height: 100px;
   }
 
   .forecast-icon {
-    width: 100px;
-    height: 100px;
+    width: 60px;
+    height: 60px;
   }
 
   .forecast-description {
@@ -416,26 +534,49 @@
 
   /* Homepage XL */
   .homepage-title {
-    font-size: 5rem;
+    font-size: 4rem;
   }
 
   .homepage-subtitle {
-    font-size: 1.75rem;
+    font-size: 1.35rem;
   }
 
   .homepage-input {
-    font-size: 1.3rem;
-    padding: 1.5rem 2rem;
+    font-size: 1.1rem;
+    padding: 1rem 1.5rem;
   }
 
   .search-icon {
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
   }
 
   .popular-city-btn {
-    font-size: 1.1rem;
-    padding: 0.85rem 1.75rem;
+    font-size: 0.95rem;
+    padding: 0.65rem 1.3rem;
+  }
+
+  .geolocation-btn {
+    font-size: 1.05rem;
+    padding: 0.95rem 1.75rem;
+  }
+
+  /* Autocomplete desktop */
+  .autocomplete-dropdown {
+    right: 80px;
+    max-height: 350px;
+  }
+
+  .autocomplete-item {
+    padding: 16px 20px;
+  }
+
+  .autocomplete-item .city-name {
+    font-size: 1.05rem;
+  }
+
+  .autocomplete-item .city-details {
+    font-size: 0.9rem;
   }
 }
 

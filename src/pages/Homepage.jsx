@@ -1,28 +1,85 @@
 import { useState } from "react";
-import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
-import { Search } from "react-bootstrap-icons";
+import { Container, Row, Col, Card, Button, Alert } from "react-bootstrap";
+import { GeoAltFill } from "react-bootstrap-icons";
 import { useNavigate } from "react-router-dom";
+import SearchAutocomplete from "../components/SearchAutocomplete";
+import { getCityFromCoordinates } from "../services/weatherAPI";
 
 const Homepage = () => {
-  const [city, setCity] = useState("");
   const navigate = useNavigate();
+  const [geoLoading, setGeoLoading] = useState(false);
+  const [geoError, setGeoError] = useState(null);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (city.trim()) {
-      navigate(`/weather/${city.trim()}`);
+  const handleGeolocation = () => {
+    if (!navigator.geolocation) {
+      setGeoError("La geolocalizzazione non è supportata dal tuo browser");
+      return;
+    }
+
+    setGeoLoading(true);
+    setGeoError(null);
+
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        try {
+          const { latitude, longitude } = position.coords;
+          const cityData = await getCityFromCoordinates(latitude, longitude);
+
+          // Naviga alla pagina meteo con coordinate
+          navigate(
+            `/weather/${encodeURIComponent(cityData.name)}?lat=${
+              cityData.lat
+            }&lon=${cityData.lon}`
+          );
+        } catch (error) {
+          setGeoError("Impossibile determinare la tua posizione");
+        } finally {
+          setGeoLoading(false);
+        }
+      },
+      (error) => {
+        setGeoLoading(false);
+        if (error.code === error.PERMISSION_DENIED) {
+          setGeoError("Permesso di geolocalizzazione negato");
+        } else if (error.code === error.POSITION_UNAVAILABLE) {
+          setGeoError("Posizione non disponibile");
+        } else if (error.code === error.TIMEOUT) {
+          setGeoError("Timeout della richiesta di geolocalizzazione");
+        } else {
+          setGeoError("Errore durante la geolocalizzazione");
+        }
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0,
+      }
+    );
+  };
+
+  const handleCitySelect = (cityData) => {
+    // Se cityData è un oggetto con coordinate, passa lat/lon come query params
+    if (typeof cityData === "object" && cityData.lat && cityData.lon) {
+      navigate(
+        `/weather/${encodeURIComponent(cityData.name)}?lat=${
+          cityData.lat
+        }&lon=${cityData.lon}`
+      );
+    } else {
+      // Altrimenti usa solo il nome (per città popolari)
+      navigate(`/weather/${cityData}`);
     }
   };
 
   return (
-    <Container fluid className="py-3 py-md-5 py-lg-5 px-3 px-lg-5">
+    <Container fluid className="py-2 py-md-3 py-lg-3 px-2 px-md-3 px-lg-4">
       <div className="homepage-container">
         <Row className="justify-content-center">
-          <Col xs={12} sm={11} md={10} lg={9} xl={8} xxl={7}>
+          <Col xs={12}>
             <Card className="shadow-lg fade-in homepage-card">
-              <Card.Body className="p-4 p-md-5 p-lg-6">
-                <div className="text-center mb-4 mb-md-5 mb-lg-6">
-                  <h1 className="display-4 homepage-title mb-3 mb-lg-4">
+              <Card.Body className="p-3 p-md-4 p-lg-4">
+                <div className="text-center mb-3 mb-md-4 mb-lg-4">
+                  <h1 className="display-4 homepage-title mb-2 mb-lg-3">
                     Mi devo portare l'ombrello?
                   </h1>
                   <p className="text-muted homepage-subtitle mb-0">
@@ -31,39 +88,37 @@ const Homepage = () => {
                   </p>
                 </div>
 
-                <Form onSubmit={handleSubmit}>
-                  <Form.Group className="mb-4 mb-lg-5">
-                    <Form.Label className="homepage-label">
-                      Cerca una città
-                    </Form.Label>
-                    <div className="d-flex gap-2 gap-lg-3">
-                      <Form.Control
-                        type="text"
-                        placeholder="es. Milano, Parigi, Tokyo..."
-                        value={city}
-                        onChange={(e) => setCity(e.target.value)}
-                        size="lg"
-                        required
-                        autoFocus
-                        className="homepage-input"
-                      />
-                      <Button
-                        variant="primary"
-                        type="submit"
-                        size="lg"
-                        className="px-3 px-md-4 px-lg-5 homepage-search-btn"
-                      >
-                        <Search className="search-icon" />
-                      </Button>
-                    </div>
-                  </Form.Group>
-                </Form>
+                {geoError && (
+                  <Alert
+                    variant="danger"
+                    dismissible
+                    onClose={() => setGeoError(null)}
+                    className="mb-3"
+                  >
+                    {geoError}
+                  </Alert>
+                )}
 
-                <div className="mt-4 mt-lg-5">
-                  <p className="text-muted mb-3 homepage-popular-label">
+                <div className="mb-3 mb-lg-4">
+                  <Button
+                    className="w-100 geolocation-btn"
+                    onClick={handleGeolocation}
+                    disabled={geoLoading}
+                  >
+                    <GeoAltFill className="me-2" />
+                    {geoLoading
+                      ? "Rilevamento posizione..."
+                      : "Usa la mia posizione"}
+                  </Button>
+                </div>
+
+                <SearchAutocomplete onCitySelect={handleCitySelect} />
+
+                <div className="mt-3 mt-lg-4">
+                  <p className="text-muted mb-2 homepage-popular-label">
                     Città popolari:
                   </p>
-                  <div className="d-flex flex-wrap gap-2 gap-lg-3">
+                  <div className="d-flex flex-wrap gap-2 gap-lg-2">
                     {[
                       "Milano",
                       "Roma",

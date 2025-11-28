@@ -26,21 +26,21 @@ const ForecastDay = ({ forecast }) => {
           border: "1px solid var(--border-subtle)",
         }}
       >
-        <Card.Body className="p-3 p-lg-4">
+        <Card.Body className="p-2 p-lg-2">
           <div className="small text-muted text-capitalize mb-1">{dayName}</div>
-          <div className="small fw-semibold mb-2">{dayNumber}</div>
-          <div className="small text-muted mb-2 mb-lg-3">{time}</div>
+          <div className="small fw-semibold mb-1">{dayNumber}</div>
+          <div className="small text-muted mb-2" style={{ fontSize: "0.7rem" }}>
+            {time}
+          </div>
           <img
             src={getWeatherIconUrl(weatherData.icon)}
             alt={weatherData.description}
-            className="forecast-icon mb-2"
+            className="forecast-icon mb-1"
           />
-          <div className="fw-bold fs-5 fs-lg-4 mb-1">
-            {Math.round(main.temp)}°
-          </div>
+          <div className="fw-bold fs-6 mb-1">{Math.round(main.temp)}°</div>
           <div
             className="small text-muted text-capitalize forecast-description"
-            style={{ fontSize: "0.75rem" }}
+            style={{ fontSize: "0.7rem" }}
           >
             {weatherData.description}
           </div>

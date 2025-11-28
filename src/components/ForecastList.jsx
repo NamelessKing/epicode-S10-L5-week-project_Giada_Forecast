@@ -10,9 +10,9 @@ const ForecastList = ({ forecast }) => {
     .slice(0, 5);
 
   return (
-    <div className="mb-4 forecast-section">
-      <h3 className="h4 mb-3 mb-lg-4">Previsioni prossimi 5 giorni</h3>
-      <Row className="g-3 g-lg-4">
+    <div className="mb-2 forecast-section">
+      <h3 className="h5 mb-2 mb-lg-3">Previsioni prossimi 5 giorni</h3>
+      <Row className="g-2 g-lg-2">
         {dailyForecasts.map((item, index) => (
           <ForecastDay key={index} forecast={item} />
         ))}
