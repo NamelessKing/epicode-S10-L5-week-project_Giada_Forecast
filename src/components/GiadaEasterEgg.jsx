@@ -56,7 +56,7 @@ const GiadaEasterEgg = () => {
 
   // Dati meteo personalizzati
   const specialWeather = {
-    name: "Giada",
+    name: "Ship Princess",
     sys: { country: "❤️" },
     main: {
       temp: 25,
@@ -147,7 +147,7 @@ const GiadaEasterEgg = () => {
           >
             <Card.Body className="text-center p-4">
               <StarFill className="mb-2" size={40} />
-              <h3 className="mb-2">Sorpresa! Hai scoperto l'Easter Egg! 🎁</h3>
+              <h3 className="mb-2">Zio Billy! Hai scoperto l'Easter Egg! 🎁</h3>
               <p className="mb-0 fs-5">Principessa delle navi👑</p>
             </Card.Body>
           </Card>
