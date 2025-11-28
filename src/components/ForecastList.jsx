@@ -11,7 +11,9 @@ const ForecastList = ({ forecast }) => {
 
   return (
     <div className="mb-2 forecast-section">
-      <h3 className="h5 mb-2 mb-lg-3">Previsioni prossimi 5 giorni</h3>
+      <h3 className="h5 mb-2 mb-lg-3 text-white">
+        Previsioni prossimi 5 giorni
+      </h3>
       <Row className="g-2 g-lg-2">
         {dailyForecasts.map((item, index) => (
           <ForecastDay key={index} forecast={item} />

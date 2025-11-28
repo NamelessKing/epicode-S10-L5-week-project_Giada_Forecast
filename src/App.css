@@ -271,6 +271,37 @@
   padding: 0.5rem 1rem;
 }
 
+/* Giada Special Button */
+.giada-special-btn {
+  animation: heartbeat 2s ease-in-out infinite;
+  font-weight: 600;
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%) !important;
+  border: 2px solid #ff8fa3 !important;
+  color: #d63384 !important;
+  box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+}
+
+.giada-special-btn:hover {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
+  border-color: #f5576c !important;
+  color: white !important;
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(245, 87, 108, 0.4);
+}
+
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.05);
+  }
+  50% {
+    transform: scale(1);
+  }
+}
+
 /* Geolocation Button */
 .geolocation-btn {
   font-size: 1rem;

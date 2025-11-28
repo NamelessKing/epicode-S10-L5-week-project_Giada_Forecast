@@ -1,0 +1,193 @@
+/* Giada Easter Egg Styles */
+
+.giada-easter-egg {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+/* Container cuori */
+.hearts-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Cuori che cadono */
+.falling-heart {
+  position: absolute;
+  top: -50px;
+  color: #ff69b4;
+  animation: fall linear forwards;
+  opacity: 0.7;
+  filter: drop-shadow(0 0 5px rgba(255, 105, 180, 0.5));
+}
+
+@keyframes fall {
+  0% {
+    top: -50px;
+    opacity: 0;
+    transform: translateY(0) rotate(0deg);
+  }
+  10% {
+    opacity: 0.7;
+  }
+  90% {
+    opacity: 0.7;
+  }
+  100% {
+    top: 100vh;
+    opacity: 0;
+    transform: translateY(0) rotate(360deg);
+  }
+}
+
+/* Sole speciale */
+.special-sun {
+  font-size: 4rem;
+  animation: pulse 2s ease-in-out infinite;
+  display: inline-block;
+}
+
+.special-sun-small {
+  animation: pulse 2s ease-in-out infinite;
+  display: inline-block;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* Card speciale messaggio */
+.special-message-card {
+  animation: slideInDown 0.6s ease-out;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Weather card speciale */
+.weather-card-special {
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Descrizione speciale con fade */
+.special-description {
+  animation: fadeInText 1s ease-in-out;
+}
+
+@keyframes fadeInText {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Forecast cards speciali */
+.special-forecast-card {
+  animation: popIn 0.5s ease-out backwards;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.special-forecast-card:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 12px 24px rgba(255, 105, 180, 0.3) !important;
+}
+
+.special-forecast-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.special-forecast-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.special-forecast-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.special-forecast-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.special-forecast-card:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Effetto shimmer sulle card */
+.weather-card-special::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .special-sun {
+    font-size: 3rem;
+  }
+
+  .falling-heart {
+    font-size: 16px !important;
+  }
+}

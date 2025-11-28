@@ -4,12 +4,18 @@ import { Container, Alert, Spinner, Button } from "react-bootstrap";
 import { ArrowLeft } from "react-bootstrap-icons";
 import WeatherCard from "../components/WeatherCard";
 import ForecastList from "../components/ForecastList";
+import GiadaEasterEgg from "../components/GiadaEasterEgg";
 import { getCurrentWeather, getForecast } from "../services/weatherAPI";
 
 const WeatherDetail = () => {
   const { city } = useParams();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+
+  // Easter egg: se la città è "Giada", mostra il componente speciale
+  if (city && city.toLowerCase() === "giada") {
+    return <GiadaEasterEgg />;
+  }
 
   const [weather, setWeather] = useState(null);
   const [forecast, setForecast] = useState(null);

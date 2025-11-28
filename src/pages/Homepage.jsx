@@ -126,14 +126,21 @@ const Homepage = () => {
                       "Londra",
                       "Tokyo",
                       "New York",
+                      "Giada",
                     ].map((popularCity) => (
                       <Button
                         key={popularCity}
-                        variant="outline-secondary"
-                        className="popular-city-btn"
+                        variant={
+                          popularCity === "Giada"
+                            ? "outline-primary"
+                            : "outline-secondary"
+                        }
+                        className={`popular-city-btn ${
+                          popularCity === "Giada" ? "giada-special-btn" : ""
+                        }`}
                         onClick={() => navigate(`/weather/${popularCity}`)}
                       >
-                        {popularCity}
+                        {popularCity === "Giada" ? "💝 Giada" : popularCity}
                       </Button>
                     ))}
                   </div>
