@@ -20,34 +20,39 @@ const GiadaEasterEgg = () => {
     "Giornata perfetta in arrivo! 🌈",
   ];
 
-  // Crea cuori animati
+  // Animazione cuori che cadono: crea un nuovo cuore ogni 400ms
   useEffect(() => {
     const interval = setInterval(() => {
+      // Crea un cuore con posizione, durata e dimensione casuali
       const newHeart = {
-        id: Date.now() + Math.random(),
-        left: Math.random() * 100,
-        animationDuration: 3 + Math.random() * 2,
-        size: 20 + Math.random() * 20,
+        id: Date.now() + Math.random(), // ID unico
+        left: Math.random() * 100, // Posizione orizzontale casuale (0-100%)
+        animationDuration: 3 + Math.random() * 2, // Durata tra 3 e 5 secondi
+        size: 20 + Math.random() * 20, // Dimensione tra 20 e 40px
       };
       setHearts((prev) => [...prev, newHeart]);
 
-      // Rimuovi cuori vecchi
+      // Rimuovi il cuore dopo 5 secondi per evitare sovraccarico di memoria
       setTimeout(() => {
         setHearts((prev) => prev.filter((h) => h.id !== newHeart.id));
       }, 5000);
-    }, 400);
+    }, 400); // Nuovo cuore ogni 400ms
 
+    // Cleanup: ferma l'intervallo quando il componente viene smontato
     return () => clearInterval(interval);
   }, []);
 
-  // Cambia messaggio ogni 4 secondi
+  // Rotazione messaggi: cambia il messaggio visualizzato ogni 4 secondi
   useEffect(() => {
     const interval = setInterval(() => {
+      // Passa al prossimo messaggio, ripartendo da 0 quando arriva alla fine
+      // L'operatore % (modulo) fa ripartire il conteggio da zero
       setMessageIndex((prev) => (prev + 1) % romanticMessages.length);
-    }, 4000);
+    }, 4000); // Cambia ogni 4 secondi
 
+    // Cleanup: ferma l'intervallo quando il componente viene smontato
     return () => clearInterval(interval);
-  }, []);
+  }, [romanticMessages.length]);
 
   // Dati meteo personalizzati
   const specialWeather = {

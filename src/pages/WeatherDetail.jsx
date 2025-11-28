@@ -23,20 +23,22 @@ const WeatherDetail = () => {
       setError(null);
 
       try {
-        // Controlla se ci sono coordinate nei query params
+        // Controlla se nell'URL ci sono coordinate (da autocomplete o geolocalizzazione)
+        // Esempio URL: /weather/Milano?lat=45.46&lon=9.19
         const lat = searchParams.get("lat");
         const lon = searchParams.get("lon");
 
         let cityOrCoords;
         if (lat && lon) {
-          // Usa coordinate per ricerca precisa
+          // Usa coordinate per ricerca precisa (evita omonimie tipo Roma USA vs Roma Italia)
           cityOrCoords = { lat: parseFloat(lat), lon: parseFloat(lon) };
         } else {
-          // Usa nome città
+          // Usa solo il nome città (per città popolari cliccate direttamente)
           cityOrCoords = city;
         }
 
-        // Fetch parallelo di meteo attuale e previsioni
+        // Carica meteo attuale e previsioni in parallelo (più veloce)
+        // Promise.all aspetta che entrambe le chiamate finiscano
         const [currentWeather, forecastData] = await Promise.all([
           getCurrentWeather(cityOrCoords),
           getForecast(cityOrCoords),

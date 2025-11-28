@@ -12,6 +12,8 @@ const SearchAutocomplete = ({ onCitySelect }) => {
   const dropdownRef = useRef(null);
   const inputRef = useRef(null);
 
+  // DEBOUNCING: aspetta 300ms dopo che l'utente smette di scrivere
+  // prima di chiamare l'API. Così evitiamo troppe chiamate inutili
   useEffect(() => {
     const delayDebounce = setTimeout(async () => {
       if (query.trim().length >= 2) {
@@ -24,20 +26,25 @@ const SearchAutocomplete = ({ onCitySelect }) => {
         setSuggestions([]);
         setShowDropdown(false);
       }
-    }, 300);
+    }, 300); // 300ms di ritardo
 
+    // Cleanup: se l'utente continua a scrivere, cancella il timer precedente
     return () => clearTimeout(delayDebounce);
   }, [query]);
 
-  // Click fuori dal dropdown per chiuderlo
+  // Chiudi il dropdown se l'utente clicca fuori da esso
+  // Usa useRef per controllare se il click è dentro o fuori il componente
   useEffect(() => {
     const handleClickOutside = (event) => {
+      // Se il click è fuori dal dropdown, chiudilo
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setShowDropdown(false);
       }
     };
 
+    // Aggiungi listener per il click sul documento
     document.addEventListener("mousedown", handleClickOutside);
+    // Rimuovi listener quando il componente viene smontato (cleanup)
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
@@ -65,25 +72,31 @@ const SearchAutocomplete = ({ onCitySelect }) => {
     }
   };
 
+  // NAVIGAZIONE CON TASTIERA nel dropdown
+  // Frecce su/giù per muoversi, Enter per selezionare, Esc per chiudere
   const handleKeyDown = (e) => {
     if (!showDropdown || suggestions.length === 0) return;
 
     if (e.key === "ArrowDown") {
       e.preventDefault();
+      // Vai al prossimo elemento (se non sei all'ultimo)
       setSelectedIndex((prev) =>
         prev < suggestions.length - 1 ? prev + 1 : prev
       );
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
+      // Vai al precedente elemento (se non sei al primo)
       setSelectedIndex((prev) => (prev > 0 ? prev - 1 : -1));
     } else if (e.key === "Enter") {
       e.preventDefault();
+      // Seleziona l'elemento evidenziato o cerca il testo digitato
       if (selectedIndex >= 0) {
         handleCitySelect(suggestions[selectedIndex]);
       } else {
         handleSubmit(e);
       }
     } else if (e.key === "Escape") {
+      // Chiudi il dropdown
       setShowDropdown(false);
     }
   };

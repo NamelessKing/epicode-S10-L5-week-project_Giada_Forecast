@@ -10,15 +10,17 @@ const GEO_URL = "https://api.openweathermap.org/geo/1.0";
 export const getCurrentWeather = async (cityOrCoords) => {
   try {
     let url;
+    // Controlla se stiamo ricevendo un oggetto con coordinate (più preciso)
+    // oppure una semplice stringa con il nome della città
     if (
       typeof cityOrCoords === "object" &&
       cityOrCoords.lat &&
       cityOrCoords.lon
     ) {
-      // Usa coordinate
+      // Usa coordinate per ricerca precisa (da autocomplete o geolocalizzazione)
       url = `${BASE_URL}/weather?lat=${cityOrCoords.lat}&lon=${cityOrCoords.lon}&appid=${API_KEY}&units=metric&lang=it`;
     } else {
-      // Usa nome città
+      // Usa nome città per ricerca generica
       url = `${BASE_URL}/weather?q=${cityOrCoords}&appid=${API_KEY}&units=metric&lang=it`;
     }
 
@@ -85,11 +87,14 @@ export const getWeatherIconUrl = (iconCode) => {
  * @returns {Promise<Array>} Array of matching cities
  */
 export const searchCities = async (query) => {
+  // Controllo minimo di 2 caratteri per evitare troppe richieste API
   if (!query || query.trim().length < 2) {
     return [];
   }
 
   try {
+    // API di geocoding: converte il nome di una città in coordinate
+    // Limit 5 = massimo 5 risultati nella ricerca autocomplete
     const response = await fetch(
       `${GEO_URL}/direct?q=${query}&limit=5&appid=${API_KEY}`
     );
@@ -114,6 +119,8 @@ export const searchCities = async (query) => {
  */
 export const getCityFromCoordinates = async (lat, lon) => {
   try {
+    // Reverse geocoding: da coordinate geografiche ottieni il nome della città
+    // Usato per la funzione "Usa la mia posizione"
     const response = await fetch(
       `${GEO_URL}/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${API_KEY}`
     );

@@ -11,6 +11,7 @@ const Homepage = () => {
   const [geoError, setGeoError] = useState(null);
 
   const handleGeolocation = () => {
+    // Controlla se il browser supporta la geolocalizzazione
     if (!navigator.geolocation) {
       setGeoError("La geolocalizzazione non è supportata dal tuo browser");
       return;
@@ -19,13 +20,17 @@ const Homepage = () => {
     setGeoLoading(true);
     setGeoError(null);
 
+    // Richiedi la posizione dell'utente (richiede permessi)
     navigator.geolocation.getCurrentPosition(
       async (position) => {
         try {
+          // Estrai latitudine e longitudine dalla posizione rilevata
           const { latitude, longitude } = position.coords;
+          // Usa reverse geocoding per ottenere il nome della città
           const cityData = await getCityFromCoordinates(latitude, longitude);
 
-          // Naviga alla pagina meteo con coordinate
+          // Naviga alla pagina meteo passando sia il nome che le coordinate
+          // (così la ricerca sarà precisa)
           navigate(
             `/weather/${encodeURIComponent(cityData.name)}?lat=${
               cityData.lat
