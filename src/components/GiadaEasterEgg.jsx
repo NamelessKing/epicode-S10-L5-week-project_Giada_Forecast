@@ -14,10 +14,8 @@ const GiadaEasterEgg = () => {
     "Zio billi! ☀️",
     "La Principessa delle Navi è qui 🚢",
     "Lattina di Pepsie approved 🥤",
-    "Previsioni: sole e sorrisi 😊",
     "Mini Giada, maxi energia! ⚡",
     "Cuoricino mode: ON 💛",
-    "Giornata perfetta in arrivo! 🌈",
   ];
 
   // Animazione cuori che cadono: crea un nuovo cuore ogni 400ms
